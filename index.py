@@ -71,6 +71,37 @@ def evaluate_board(board, player):
                 score -= 30  # Penalize if the AI doesn't block an opponent's threat
 
     return score
+def AlphaBeta_Minimax(board, depth, maximizing_player, player, alpha,beta):
+    """
+    Minimax algorithm with Alpha-Beta Pruning.
+    """
+    if depth == 0 or game_over(board):
+        return evaluate_board(board, player)
+
+    if maximizing_player:  # Computer's move (maximizing player)
+        max_eval = float("-inf")
+        for col in range(len(board[0])):
+            if board[0][col] == "_":  # Check if the column is not full
+                row = drop_chip(board, col, "o")  # Drop the chip
+                eval = AlphaBeta_Minimax(board, depth - 1, False, "o", alpha, beta)
+                board[row][col] = "_"  # Undo the move
+                max_eval = max(max_eval, eval)
+                alpha = max(alpha, eval)
+                if beta <= alpha:
+                    break  # Beta cutoff
+        return max_eval
+    else:  # Human's move (minimizing player)
+        min_eval = float("inf")
+        for col in range(len(board[0])):
+            if board[0][col] == "_":  # Check if the column is not full
+                row = drop_chip(board, col, "x")  # Drop the chip
+                eval = AlphaBeta_Minimax(board, depth - 1, True, "x",  alpha, beta)
+                board[row][col] = "_"  # Undo the move
+                min_eval = min(min_eval, eval)
+                beta = min(beta, eval)
+                if beta <= alpha:
+                    break  # Alpha cutoff
+        return min_eval
 
 def minimax(board, depth, maximizing_player, player):
     """Minimax algorithm with a better heuristic."""
@@ -103,7 +134,7 @@ def game_over(board):
             return False
     return True
 
-def best_move(board):
+def best_move(board, algo="minimax"):
     """Returns the best column for the computer to drop its chip by using a copy of the board."""
     best_col = -1
     best_value = float("-inf")
@@ -112,7 +143,15 @@ def best_move(board):
     for col in range(len(board[0])):
         if board_copy[0][col] == "_":  # Check if the column is not full
             row = drop_chip(board_copy, col, "o")  # Drop the chip temporarily
-            move_value = minimax(board_copy, 3, False, "o")  # Search to depth 3
+            
+            # Call the selected algorithm
+            if algo == "minimax":
+                move_value = minimax(board_copy, 3, False, "o")
+            elif algo == "alpha_beta":
+                move_value = AlphaBeta_Minimax(board_copy, 3, False, "o",  float("-inf"), float("inf"))
+            else:
+                print("invalid algorithm")
+
             board_copy[row][col] = "_"  # Undo the move
 
             # Keep track of the best move
@@ -122,12 +161,24 @@ def best_move(board):
 
     return best_col
 
+
 def start_game(board, row, col):
     """Starts the Connect 4 game loop."""
+
     board = initialize_board(board, row, col)
     computer = "o"
     human = "x"
     turns = row * col  # Total number of turns
+    
+    print("Choose AI Algorithm:")
+    print("1.Minimax")
+    print("2.Alpha-Beta Pruning Minimax")
+    choice = input("Enter your choice (1/2): ").strip() 
+    if choice == "1" :
+         algorithm = "minimax"
+    else:
+         algorithm = "alpha_beta"     
+
     for turn in range(turns):
         print_board(board)  # Display board before the turn
         print(f"Turn {turn + 1}")
@@ -143,7 +194,7 @@ def start_game(board, row, col):
             print(f"Human placed chip in column {play_col}, row {row_placed}")
         else:  # Computer's turn
             print("Computer is thinking...")
-            col_computer = best_move(board)  # Get the best column for the computer
+            col_computer = best_move(board, algo=algorithm)  # Use selected algorithm
             if col_computer != -1:
                 row_placed = drop_chip(board, col_computer, computer)  # Place computer's chip
                 print(f"Computer placed chip in column {col_computer}, row {row_placed}")
