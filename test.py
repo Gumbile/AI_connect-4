@@ -43,7 +43,7 @@ def evaluate_board(board, player):
     """Evaluates the board based on several strategic factors."""
     opponent = "x" if player == "o" else "o"
     score = 0
-
+    
     # 1. Center control: Reward for placing chips in the center columns
     center_col = len(board[0]) // 2
     if board[0][center_col] == player:
@@ -71,6 +71,7 @@ def evaluate_board(board, player):
                 score -= 30  # Penalize if the AI doesn't block an opponent's threat
 
     return score
+
 def AlphaBeta_Minimax(board, depth, maximizing_player, player, alpha,beta):
     """
     Minimax algorithm with Alpha-Beta Pruning.
@@ -126,6 +127,47 @@ def minimax(board, depth, maximizing_player, player):
                 board[row][col] = "_"  # Undo the move
                 min_eval = min(min_eval, eval)
         return min_eval
+    
+def expected_minimax(board, depth, maximizing_player, player):
+    if depth == 0 or game_over(board):
+        return evaluate_board(board, player)
+
+    if maximizing_player:
+        expected_value = 0
+        total_prob = 0
+        for col in range(len(board[0])):
+            if board[0][col] == "_":
+                row = drop_chip(board, col, "o")
+                prob = 0.6
+                expected_value += prob * expected_minimax(board, depth - 1, False, "o")
+                total_prob += prob
+                board[row][col] = "_"
+
+                if col > 0:
+                    row = drop_chip(board, col - 1, "o")
+                    prob_left = 0.2
+                    expected_value += prob_left * expected_minimax(board, depth - 1, False, "o")
+                    total_prob += prob_left
+                    board[row][col - 1] = "_"
+
+                if col < len(board[0]) - 1:
+                    row = drop_chip(board, col + 1, "o")
+                    prob_right = 0.2
+                    expected_value += prob_right * expected_minimax(board, depth - 1, False, "o")
+                    total_prob += prob_right
+                    board[row][col + 1] = "_"
+
+        return expected_value / total_prob if total_prob > 0 else expected_value
+
+    else:
+        min_eval = float("inf")
+        for col in range(len(board[0])):
+            if board[0][col] == "_":
+                row = drop_chip(board, col, "x")
+                eval = expected_minimax(board, depth - 1, True, "x")
+                board[row][col] = "_"
+                min_eval = min(min_eval, eval)
+        return min_eval
 
 def game_over(board):
     """Checks if the game is over (either player has won or the board is full)."""
@@ -154,6 +196,8 @@ def best_move(board, algo="minimax", verbose=False):
                 move_value = minimax(board_copy, 3, False, "o")
             elif algo == "alpha_beta":
                 move_value = AlphaBeta_Minimax(board_copy, 3, False, "o", float("-inf"), float("inf"))
+            elif algo == "expected_minimax":
+                move_value = expected_minimax(board_copy, 3, True, "o")
             else:
                 move_value = float("-inf")  # Invalid algorithm
             
@@ -168,7 +212,7 @@ def best_move(board, algo="minimax", verbose=False):
 
     # If verbose, print all possible moves, their heuristic values, and board states
     if verbose:
-        print("\nAI Possible Moves and Heuristics:")
+        print("\nAI possible moves:")
         for col, score, state in move_scores:
             print(f"Column: {col}, Heuristic: {score}")
             print_board(state)  # Print the board state for this move
@@ -188,13 +232,16 @@ def start_game(board, row, col):
     turns = row * col  # Total number of turns
     
     print("Choose AI Algorithm:")
-    print("1.Minimax")
-    print("2.Alpha-Beta Pruning Minimax")
-    choice = input("Enter your choice (1/2): ").strip() 
-    if choice == "1" :
-         algorithm = "minimax"
-    else:
-         algorithm = "alpha_beta"     
+    print("1. Minimax")
+    print("2. Alpha-Beta Pruning Minimax")
+    print("3. Expected Minimax")
+    choice = input("Enter your choice (1/2/3): ").strip()
+    if choice == "1":
+        algorithm = "minimax"
+    elif choice == "2":
+        algorithm = "alpha_beta"
+    elif choice == "3":
+        algorithm = "expected_minimax"      
 
     for turn in range(turns):
         print_board(board)  # Display board before the turn
