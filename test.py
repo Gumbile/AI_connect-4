@@ -176,7 +176,7 @@ def game_over(board):
             return False
     return True
 
-def best_move(board, algo="minimax", verbose=False):
+def best_move(board, level , algo="minimax", verbose=False):
     """
     Returns the best column for the computer to drop its chip by using a copy of the board.
     If verbose is True, prints possible moves with their heuristic values and board states.
@@ -193,11 +193,11 @@ def best_move(board, algo="minimax", verbose=False):
 
             # Call the selected algorithm
             if algo == "minimax":
-                move_value = minimax(board_copy, 3, False, "o")
+                move_value = minimax(board_copy, level, False, "o")
             elif algo == "alpha_beta":
-                move_value = AlphaBeta_Minimax(board_copy, 3, False, "o", float("-inf"), float("inf"))
+                move_value = AlphaBeta_Minimax(board_copy, level, False, "o", float("-inf"), float("inf"))
             elif algo == "expected_minimax":
-                move_value = expected_minimax(board_copy, 3, True, "o")
+                move_value = expected_minimax(board_copy, level , True, "o")
             else:
                 move_value = float("-inf")  # Invalid algorithm
             
@@ -242,6 +242,7 @@ def start_game(board, row, col):
         algorithm = "alpha_beta"
     elif choice == "3":
         algorithm = "expected_minimax"      
+    level = int(input("enter truncation level:"))
 
     for turn in range(turns):
         print_board(board)  # Display board before the turn
@@ -258,7 +259,7 @@ def start_game(board, row, col):
             print(f"Human placed chip in column {play_col}, row {row_placed}")
         else:  # Computer's turn
             print("Computer is thinking...")
-            col_computer = best_move(board, algo=algorithm, verbose=True)  # Use verbose mode to show heuristics and boards
+            col_computer = best_move(board, level , algo=algorithm, verbose=True)  # Use verbose mode to show heuristics and boards
             if col_computer != -1:
                 row_placed = drop_chip(board, col_computer, computer)  # Place computer's chip
                 print(f"Computer placed chip in column {col_computer}, row {row_placed}")
