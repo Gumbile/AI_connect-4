@@ -45,6 +45,60 @@ def calculate_score(board, player):
 
     return score
 
+def evaluate_heuristic(board, player):
+    """Evaluate the board state using heuristic scoring."""
+    score = 0
+    opponent = "x" if player == "o" else "o"
+    
+    # 1. Check connected pieces
+    # Horizontal
+    for row in range(len(board)):
+        for col in range(len(board[0]) - 3):
+            window = [board[row][col + i] for i in range(4)]
+            score += evaluate_window(window, player, opponent)
+
+    # Vertical
+    for row in range(len(board) - 3):
+        for col in range(len(board[0])):
+            window = [board[row + i][col] for i in range(4)]
+            score += evaluate_window(window, player, opponent)
+
+    # Diagonal (positive slope)
+    for row in range(len(board) - 3):
+        for col in range(len(board[0]) - 3):
+            window = [board[row + i][col + i] for i in range(4)]
+            score += evaluate_window(window, player, opponent)
+
+    # Diagonal (negative slope)
+    for row in range(3, len(board)):
+        for col in range(len(board[0]) - 3):
+            window = [board[row - i][col + i] for i in range(4)]
+            score += evaluate_window(window, player, opponent)
+
+    # Center control preference
+    center_col = len(board[0]) // 2
+    center_array = [board[row][center_col] for row in range(len(board))]
+    score += center_array.count(player) * 3
+
+    return score
+
+def evaluate_window(window, player, opponent):
+    """Evaluate a window of 4 positions."""
+    score = 0
+    
+    if window.count(player) == 4:
+        score += 100
+    elif window.count(player) == 3 and window.count("_") == 1:
+        score += 5
+    elif window.count(player) == 2 and window.count("_") == 2:
+        score += 2
+
+    if window.count(opponent) == 3 and window.count("_") == 1:
+        score -= 4
+
+    return score
+
+
 def evaluate_sequence(seq, player):
     """Evaluate a seq of 4 for a given player."""
     score = 0
@@ -129,27 +183,35 @@ def AlphaBeta_Minimax(board, depth, maximizing_player, player, alpha,beta):
         return min_eval
 
 def minimax(board, depth, maximizing_player, player):
-    """Minimax algorithm with a better heuristic."""
+    """Minimax algorithm with heuristic evaluation, truncated to depth K."""
     if depth == 0 or game_over(board):
-        return evaluate_board(board, player)
+        if game_over(board):
+            player_score = calculate_score(board, "x")
+            ai_score = calculate_score(board, "o")
+            if player == "x":
+                return 100000 if player_score > ai_score else -100000
+            else:
+                return 100000 if ai_score > player_score else -100000
+        return evaluate_heuristic(board, player)
 
-    if maximizing_player:  # Computer's move (maximizing player)
+    valid_moves = [col for col in range(len(board[0])) if board[0][col] == "_"]
+    
+    if maximizing_player:
         max_eval = float("-inf")
-        for col in range(len(board[0])):
-            if board[0][col] == "_":  # Check if the column is not full
-                row = drop_chip(board, col, "o")  # Drop the chip
-                eval = minimax(board, depth - 1, False, "o")
-                board[row][col] = "_"  # Undo the move
-                max_eval = max(max_eval, eval)
+        for col in valid_moves:
+            row = drop_chip(board, col, player)
+            eval = minimax(board, depth - 1, False, player)
+            board[row][col] = "_"  # Undo move
+            max_eval = max(max_eval, eval)
         return max_eval
-    else:  # Human's move (minimizing player)
+    else:
         min_eval = float("inf")
-        for col in range(len(board[0])):
-            if board[0][col] == "_":  # Check if the column is not full
-                row = drop_chip(board, col, "x")  # Drop the chip
-                eval = minimax(board, depth - 1, True, "x")
-                board[row][col] = "_"  # Undo the move
-                min_eval = min(min_eval, eval)
+        opponent = "x" if player == "o" else "o"
+        for col in valid_moves:
+            row = drop_chip(board, col, opponent)
+            eval = minimax(board, depth - 1, True, player)
+            board[row][col] = "_"  # Undo move
+            min_eval = min(min_eval, eval)
         return min_eval
     
 def expected_minimax(board, depth, maximizing_player, player):
