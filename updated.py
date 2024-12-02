@@ -18,7 +18,13 @@ def drop_chip(board, col, chip):
             board[row][col] = chip
             return row  # Return the row where the chip was placed
     return -1  # Column is full
+def isempty(board, col):
+    """check if column have empty slots"""
+    return board[0][col] == "_"
 
+def get_empty_columns(board):
+    """Get valid columns for current board."""
+    return [col for col in range(cols) if isempty(board, col)]
 def calculate_score(board, player):
     """Calculates the score for a player by counting sequences of 4 consecutive chips."""
     score = 0
@@ -39,69 +45,87 @@ def calculate_score(board, player):
 
     return score
 
-def evaluate_board(board, player):
-    """Evaluates the board based on several strategic factors."""
-    opponent = "x" if player == "o" else "o"
+def evaluate_sequence(seq, player):
+    """Evaluate a seq of 4 for a given player."""
     score = 0
+    opponent = "x" if player == "o" else "o"
     
-    # 1. Center control: Reward for placing chips in the center columns
-    center_col = len(board[0]) // 2
-    if board[0][center_col] == player:
-        score += 10  # Reward center control
-    for col in range(center_col - 1, center_col + 2):
-        if 0 <= col < len(board[0]) and board[0][col] == player:
-            score += 1  # Reward nearby center columns
+    if seq.count(player) == 4:
+        score += 1000  # Winning move
+    elif seq.count(player) == 3 and seq.count("_") == 1:
+        score += 100  # 3 in a row with one empty
+    elif seq.count(player) == 2 and seq.count("_") == 2:
+        score += 10  # 2 in a row with two empty
 
-    # 2. Block opponent's winning move (3-in-a-row with 1 open space)
-    for row in range(len(board)):
-        for col in range(len(board[0]) - 3):
-            if all(board[row][col + i] == opponent for i in range(3)) and board[row][col + 3] == "_":
-                score += 50  # High priority for blocking opponent's 3-in-a-row
-
-    # 3. Creating winning opportunities (3-in-a-row with 1 empty space)
-    for row in range(len(board)):
-        for col in range(len(board[0]) - 3):
-            if all(board[row][col + i] == player for i in range(3)) and board[row][col + 3] == "_":
-                score += 20  # Reward for creating a potential winning move
-
-    # 4. Opponent's 3-in-a-row threat (penalize if not blocked)
-    for row in range(len(board)):
-        for col in range(len(board[0]) - 3):
-            if all(board[row][col + i] == opponent for i in range(3)) and board[row][col + 3] == "_":
-                score -= 30  # Penalize if the AI doesn't block an opponent's threat
+    if seq.count(opponent) == 3 and seq.count("_") == 1:
+        score -= 100  # Block opponent's potential win
 
     return score
+
+def evaluate_board(board, player):
+    """Evaluate the board state for a given player."""
+    score = 0
+
+    # Center column score
+    center_col = cols // 2
+    center_array = [board[row][center_col] for row in range(rows)]
+    count = center_array.count(player)
+    score += count * 5  # Reward control of the center column
+    # score for all directions(vertical,horizental,positive and negative diagonal)
+    for col in range(cols):
+        col_locations = [board[row][col] for row in range(rows)]
+        for row in range(rows - 3):  
+            seq = col_locations[row:row + 4]
+            score += evaluate_sequence(seq, player)
+    
+    for row in range(rows):
+        row_locations = board[row]
+        for col in range(cols - 3):  
+            seq = row_locations[col:col + 4]
+            score += evaluate_sequence(seq, player)
+
+    for row in range(rows - 3):
+        for col in range(cols - 3):
+            seq = [board[row + i][col + i] for i in range(4)]
+            score += evaluate_sequence(seq, player)
+
+    for row in range(3, rows):
+        for col in range(cols - 3):
+            seq = [board[row - i][col + i] for i in range(4)]
+            score += evaluate_sequence(seq, player)
+
+    return score
+
 
 def AlphaBeta_Minimax(board, depth, maximizing_player, player, alpha,beta):
     """
     Minimax algorithm with Alpha-Beta Pruning.
     """
+    valid_columns = get_empty_columns(board)
     if depth == 0 or game_over(board):
         return evaluate_board(board, player)
 
     if maximizing_player:  # Computer's move (maximizing player)
         max_eval = float("-inf")
-        for col in range(len(board[0])):
-            if board[0][col] == "_":  # Check if the column is not full
-                row = drop_chip(board, col, "o")  # Drop the chip
-                eval = AlphaBeta_Minimax(board, depth - 1, False, "o", alpha, beta)
-                board[row][col] = "_"  # Undo the move
-                max_eval = max(max_eval, eval)
-                alpha = max(alpha, eval)
-                if beta <= alpha:
-                    break  # Beta cutoff
+        for col in valid_columns:
+            row = drop_chip(board, col, "o")  # Drop the chip
+            eval = AlphaBeta_Minimax(board, depth - 1, False, "o", alpha, beta)
+            board[row][col] = "_"  # Undo the move
+            max_eval = max(max_eval, eval)
+            alpha = max(alpha, eval)
+            if beta <= alpha:
+                break  # Beta cutoff
         return max_eval
     else:  # Human's move (minimizing player)
         min_eval = float("inf")
-        for col in range(len(board[0])):
-            if board[0][col] == "_":  # Check if the column is not full
-                row = drop_chip(board, col, "x")  # Drop the chip
-                eval = AlphaBeta_Minimax(board, depth - 1, True, "x",  alpha, beta)
-                board[row][col] = "_"  # Undo the move
-                min_eval = min(min_eval, eval)
-                beta = min(beta, eval)
-                if beta <= alpha:
-                    break  # Alpha cutoff
+        for col in valid_columns:
+            row = drop_chip(board, col, "x")  # Drop the chip
+            eval = AlphaBeta_Minimax(board, depth - 1, True, "x",  alpha, beta)
+            board[row][col] = "_"  # Undo the move
+            min_eval = min(min_eval, eval)
+            beta = min(beta, eval)
+            if beta <= alpha:
+                break  # Alpha cutoff
         return min_eval
 
 def minimax(board, depth, maximizing_player, player):
@@ -292,8 +316,8 @@ def start_game(board, row, col):
         print("It's a tie!")
 
 if __name__ == "__main__":
-    row = 6  # Typical for Connect 4
-    col = 7  # 7 columns for Connect 4
+    rows = 6  # Typical for Connect 4
+    cols = 7  # 7 columns for Connect 4
     board: list[list] = []
 
-    start_game(board, row, col)
+    start_game(board, rows, cols)
