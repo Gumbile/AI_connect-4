@@ -155,10 +155,17 @@ def AlphaBeta_Minimax(board, depth, maximizing_player, player, alpha,beta):
     """
     Minimax algorithm with Alpha-Beta Pruning.
     """
-    valid_columns = get_empty_columns(board)
     if depth == 0 or game_over(board):
-        return evaluate_board(board, player)
+        if game_over(board):
+            player_score = calculate_score(board, "x")
+            ai_score = calculate_score(board, "o")
+            if player == "x":
+                return 100000 if player_score > ai_score else -100000
+            else:
+                return 100000 if ai_score > player_score else -100000
+        return evaluate_heuristic(board, player)
 
+    valid_columns = get_empty_columns(board)
     if maximizing_player:  # Computer's move (maximizing player)
         max_eval = float("-inf")
         for col in valid_columns:
