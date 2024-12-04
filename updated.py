@@ -224,10 +224,15 @@ def minimax(board, depth, maximizing_player, player, column=None):
         return {'value': min_eval, 'children': children, 'column': column}
     
 def expected_minimax(board, depth, maximizing_player, player, column=None):
-    """
-    Expected Minimax algorithm that calculates the expected value using probabilities for each column.
-    """
+   
     if depth == 0 or game_over(board):
+        if game_over(board):
+            player_score = calculate_score(board, "x")
+            ai_score = calculate_score(board, "o")
+            if player == "x":
+                return 100000 if player_score > ai_score else -100000
+            else:
+                return 100000 if ai_score > player_score else -100000
         return {'value': evaluate_heuristic(board, player), 'children': [], 'column': column}
 
     valid_columns = get_empty_columns(board)
@@ -265,7 +270,6 @@ def expected_minimax(board, depth, maximizing_player, player, column=None):
         total_value = 0
 
         for col in valid_columns:
-            # Calculate the probability distribution for the chosen column for the minimizing player
             probs = get_probabilities(board, col)
             
             # Simulate the minimizing player's move
