@@ -25,6 +25,25 @@ def create_tree(board, depth, maximizing_player, player, column=None):
 
     return {'value': evaluate_heuristic(board, player), 'children': children, 'column': column}
 
+def get_probabilities(board, col):
+    # Initialize probabilities (for all columns)
+    probs = [0] * len(board[0])
+    probs[col] = 0.6
+    
+    if col > 0:
+        probs[col - 1] = 0.2
+    
+    if col < len(board[0]) - 1:
+        probs[col + 1] = 0.2
+
+    if col == 0:
+        probs[col + 1] = 0.4
+    
+    if col == len(board[0]) - 1:
+        probs[col - 1] = 0.4
+    
+    return probs
+
 def initialize_board(board, row, col):
     for i in range(row):
         board.append(["_"] * col)
@@ -205,6 +224,9 @@ def minimax(board, depth, maximizing_player, player, column=None):
         return {'value': min_eval, 'children': children, 'column': column}
     
 def expected_minimax(board, depth, maximizing_player, player, column=None):
+    """
+    Expected Minimax algorithm that calculates the expected value using probabilities for each column.
+    """
     if depth == 0 or game_over(board):
         return {'value': evaluate_heuristic(board, player), 'children': [], 'column': column}
 
@@ -214,46 +236,56 @@ def expected_minimax(board, depth, maximizing_player, player, column=None):
     if maximizing_player:  # Computer's move (maximizing player)
         max_eval = float("-inf")
         best_col = None
+
         for col in valid_columns:
+            # Calculate the probability distribution for the chosen column
+            probs = get_probabilities(board, col)
+            
+            # Simulate the maximizing player's move
             child_board = copy.deepcopy(board)
             row = drop_chip(child_board, col, "o")  # Drop the chip
-            child = Expected_Minimax(child_board, depth - 1, False, player, column=col)
+            child = expected_minimax(child_board, depth - 1, False, player, column=col)
             board[row][col] = "_"  # Undo the move
             children.append(child)
 
-            expected_value = child['value']  # Get the child's value
+            # Calculate the expected value by weighting each child value with its probability
+            expected_value = sum(prob * child['value'] for prob, child in zip(probs, children))
             max_eval = max(max_eval, expected_value)
 
             print(f"Maximizing Player (Depth {depth}):")
             print(f"    Column: {col}, Expected Value: {expected_value}, Max Eval So Far: {max_eval}")
-            print_board(board)
+            print(f"    Probs: {probs}")
             print("-----------------------------------")
 
         return {'value': max_eval, 'children': children, 'column': column}
+
     else:  # Human's move (minimizing player)
         min_eval = float("inf")
         best_col = None
         total_value = 0
 
         for col in valid_columns:
-            probabilities = calculate_column_probabilities(board, col)  # Custom function for probability distribution
+            # Calculate the probability distribution for the chosen column for the minimizing player
+            probs = get_probabilities(board, col)
+            
+            # Simulate the minimizing player's move
             child_board = copy.deepcopy(board)
             row = drop_chip(child_board, col, "x")  # Drop the chip
-            child = Expected_Minimax(child_board, depth - 1, True, player, column=col)
+            child = expected_minimax(child_board, depth - 1, True, player, column=col)
             board[row][col] = "_"  # Undo the move
             children.append(child)
 
-            # Weighted sum of child values based on probabilities
-            expected_value = sum(prob * child['value'] for prob, child in zip(probabilities, children))
+            # Calculate the expected value by weighting each child value with its probability
+            expected_value = sum(prob * child['value'] for prob, child in zip(probs, children))
             min_eval = min(min_eval, expected_value)
 
             print(f"Minimizing Player (Depth {depth}):")
             print(f"    Column: {col}, Expected Value: {expected_value}, Min Eval So Far: {min_eval}")
-            print(f"    Probabilities: {probabilities}")
-            print_board(board)
+            print(f"    Probs: {probs}")
             print("-----------------------------------")
 
         return {'value': min_eval, 'children': children, 'column': column}
+
 
 def game_over(board):
     """Checks if the game is over (either player has won or the board is full)."""
@@ -281,7 +313,8 @@ def best_move(board, level, algo="minimax", show=False):
                 result = AlphaBeta_Minimax(board_copy, level, False, "o", float("-inf"), float("inf"), column=col)
                 move_value = result['value']  
             elif algo == "expected_minimax":
-                move_value = expected_minimax(board_copy, level , False , "o")  
+                result = expected_minimax(board_copy, level , False , "o",column=col)
+                move_value = result['value'] 
             else:
                 move_value = float("-inf")  
 
