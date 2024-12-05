@@ -251,14 +251,12 @@ def expected_minimax(board, depth, maximizing_player, player, column=None):
             # Calculate the probability distribution for the chosen column
             probs = get_probabilities(board, col)
             
-            # Simulate the maximizing player's move
             child_board = copy.deepcopy(board)
-            row = drop_chip(child_board, col, "o")  # Drop the chip
+            row = drop_chip(child_board, col, "o")  
             child = expected_minimax(child_board, depth - 1, False, player, column=col)
-            board[row][col] = "_"  # Undo the move
+            board[row][col] = "_" 
             children.append(child)
 
-            # Calculate the expected value by weighting each child value with its probability
             expected_value = sum(prob * child['value'] for prob, child in zip(probs, children))
             max_eval = max(max_eval, expected_value)
 
@@ -277,11 +275,11 @@ def expected_minimax(board, depth, maximizing_player, player, column=None):
         for col in valid_columns:
             probs = get_probabilities(board, col)
             
-            # Simulate the minimizing player's move
+           
             child_board = copy.deepcopy(board)
-            row = drop_chip(child_board, col, "x")  # Drop the chip
+            row = drop_chip(child_board, col, "x") 
             child = expected_minimax(child_board, depth - 1, True, player, column=col)
-            board[row][col] = "_"  # Undo the move
+            board[row][col] = "_" 
             children.append(child)
 
             # Calculate the expected value by weighting each child value with its probability
