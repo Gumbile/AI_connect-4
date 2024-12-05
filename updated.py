@@ -1,5 +1,61 @@
 import copy
 import time
+import pygame
+import sys
+
+
+pygame.init()   
+pygame.font.init()  # Explicitly initialize the font module
+
+# Constants
+ROWS = 6
+COLS = 7
+SQUARESIZE = 100  # Size of each square
+RADIUS = 40  # Radius of the discs
+WIDTH = COLS * SQUARESIZE
+HEIGHT = (ROWS + 1) * SQUARESIZE
+BLUE = (0, 0, 255)
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+YELLOW = (255, 255, 0)
+WHITE = (255, 255, 255)
+
+# Fonts
+FONT = pygame.font.SysFont("monospace", 75)
+SMALL_FONT = pygame.font.SysFont("monospace", 40)
+
+
+def draw_board(board, screen):
+    # Draw the blue board with empty black circles
+    for c in range(COLS):
+        for r in range(ROWS):
+            # Draw blue rectangle
+            pygame.draw.rect(screen, BLUE, 
+                           (c * SQUARESIZE, 
+                            (r + 1) * SQUARESIZE, 
+                            SQUARESIZE, 
+                            SQUARESIZE))
+            # Draw empty black circle
+            pygame.draw.circle(screen, BLACK,
+                             (int(c * SQUARESIZE + SQUARESIZE / 2),
+                              int((r + 1) * SQUARESIZE + SQUARESIZE / 2)),
+                             RADIUS)
+
+    # Draw the game pieces (x and o)
+    for c in range(COLS):
+        for r in range(ROWS):
+            if board[r][c] == "x":
+                pygame.draw.circle(screen, RED,
+                                 (int(c * SQUARESIZE + SQUARESIZE / 2),
+                                  int((r + 1) * SQUARESIZE + SQUARESIZE / 2)),
+                                 RADIUS)
+            elif board[r][c] == "o":
+                pygame.draw.circle(screen, YELLOW,
+                                 (int(c * SQUARESIZE + SQUARESIZE / 2),
+                                  int((r + 1) * SQUARESIZE + SQUARESIZE / 2)),
+                                 RADIUS)
+
+    pygame.display.update()
 
 def print_tree(node, depth=0, maximizing_player=None, column=None):
     if node is None:
@@ -44,10 +100,10 @@ def get_probabilities(board, col):
     
     return probs
 
-def initialize_board(board, row, col):
-    for i in range(row):
-        board.append(["_"] * col)
+def initialize_board():
+    board = [["_" for _ in range(COLS)] for _ in range(ROWS)]
     return board
+
 
 def print_board(board):
     for row in board:
@@ -65,7 +121,7 @@ def isempty(board, col):
     return board[0][col] == "_"
 
 def get_empty_columns(board):
-    return [col for col in range(cols) if isempty(board, col)]
+    return [col for col in range(COLS) if isempty(board, col)]
 
 def calculate_score(board, player):
     """Calculates the score for a player by counting sequences of 4 consecutive chips."""
@@ -148,10 +204,14 @@ def AlphaBeta_Minimax(board, depth, maximizing_player, player, alpha, beta, colu
             player_score = calculate_score(board, "x")
             ai_score = calculate_score(board, "o")
             if player == "x":
-                return 100000 if player_score > ai_score else -100000
+                value = 100000 if player_score > ai_score else -100000
             else:
-                return 100000 if ai_score > player_score else -100000
-        return {'value': evaluate_heuristic(board, player), 'children': [], 'column': column}
+                value = 100000 if ai_score > player_score else -100000
+        else:
+            value = evaluate_heuristic(board, player)
+        
+        # Ensure a consistent dictionary structure
+        return {'value': value, 'children': [], 'column': column}
 
     valid_columns = get_empty_columns(board)
     children = []
@@ -198,10 +258,14 @@ def minimax(board, depth, maximizing_player, player, column=None):
             player_score = calculate_score(board, "x")
             ai_score = calculate_score(board, "o")
             if player == "x":
-                return 100000 if player_score > ai_score else -100000
+                value = 100000 if player_score > ai_score else -100000
             else:
-                return 100000 if ai_score > player_score else -100000
-        return {'value': evaluate_heuristic(board, player), 'children': [], 'column': column}
+                value = 100000 if ai_score > player_score else -100000
+        else:
+            value = evaluate_heuristic(board, player)
+        
+        # Ensure a consistent dictionary structure
+        return {'value': value, 'children': [], 'column': column}
     valid_moves = get_empty_columns(board)
     children = []
 
@@ -235,10 +299,14 @@ def expected_minimax(board, depth, maximizing_player, player, column=None):
             player_score = calculate_score(board, "x")
             ai_score = calculate_score(board, "o")
             if player == "x":
-                return 100000 if player_score > ai_score else -100000
+                value = 100000 if player_score > ai_score else -100000
             else:
-                return 100000 if ai_score > player_score else -100000
-        return {'value': evaluate_heuristic(board, player), 'children': [], 'column': column}
+                value = 100000 if ai_score > player_score else -100000
+        else:
+            value = evaluate_heuristic(board, player)
+        
+        # Ensure a consistent dictionary structure
+        return {'value': value, 'children': [], 'column': column}
 
     valid_columns = get_empty_columns(board)
     children = []
@@ -344,6 +412,159 @@ def best_move(board, level, algo="minimax", show=False):
     print(f"Nodes expanded: {expanded_nodes}")
     return (best_col, move_scores)
 
+
+def show_menu(screen):
+    # Initialize level_choice with a default value
+    level_choice = 3  # Default level set to 3
+
+    # Shift the menu slightly to the left by changing the `x` starting position
+    menu_x = WIDTH // 9  # You can change this value to shift the menu further left or right
+
+    screen.fill(WHITE)
+
+    # Title
+    title = FONT.render("Connect 4", True, BLACK)
+    screen.blit(title, (menu_x, HEIGHT // 4))
+
+    # Algorithm Options
+    minimax_text = SMALL_FONT.render("1. Minimax", True, BLACK)
+    alpha_beta_text = SMALL_FONT.render("2. Alpha-Beta", True, BLACK)
+    expected_minimax_text = SMALL_FONT.render("3. Expected Minimax", True, BLACK)
+    screen.blit(minimax_text, (menu_x, HEIGHT // 2 - 40))
+    screen.blit(alpha_beta_text, (menu_x, HEIGHT // 2))
+    screen.blit(expected_minimax_text, (menu_x, HEIGHT // 2 + 40))
+
+    # Truncation Level (adjustable)
+    level_text = SMALL_FONT.render(f"Level: {level_choice}", True, BLACK)
+    screen.blit(level_text, (menu_x, HEIGHT // 2 + 80))
+
+    # Instructions for changing level
+    level_instructions = SMALL_FONT.render("Use LEFT/RIGHT arrows", True, BLACK)
+    screen.blit(level_instructions, (menu_x, HEIGHT // 2 + 120))
+
+    pygame.display.update()
+
+    # Wait for user input (algorithm and truncation level)
+    algorithm_choice = None
+    while algorithm_choice is None:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                x, y = event.pos
+                # Click on algorithm options
+                if HEIGHT // 2 - 40 < y < HEIGHT // 2:
+                    algorithm_choice = "minimax"
+                elif HEIGHT // 2 < y < HEIGHT // 2 + 40:
+                    algorithm_choice = "alpha_beta"
+                elif HEIGHT // 2 + 40 < y < HEIGHT // 2 + 80:
+                    algorithm_choice = "expected_minimax"
+
+            if event.type == pygame.KEYDOWN:
+                # Number key selections for algorithm
+                if event.key == pygame.K_1:
+                    algorithm_choice = "minimax"
+                elif event.key == pygame.K_2:
+                    algorithm_choice = "alpha_beta"
+                elif event.key == pygame.K_3:
+                    algorithm_choice = "expected_minimax"
+                
+                # Arrow key adjustments for truncation level
+                if event.key == pygame.K_RIGHT and level_choice < 10:
+                    level_choice += 1
+                elif event.key == pygame.K_LEFT and level_choice > 1:
+                    level_choice -= 1
+                
+                # Update the level display after a key press
+                level_text = SMALL_FONT.render(f"Level: {level_choice}", True, BLACK)
+                screen.fill(WHITE)
+                screen.blit(title, (menu_x, HEIGHT // 4))
+                screen.blit(minimax_text, (menu_x, HEIGHT // 2 - 40))
+                screen.blit(alpha_beta_text, (menu_x, HEIGHT // 2))
+                screen.blit(expected_minimax_text, (menu_x, HEIGHT // 2 + 40))
+                screen.blit(level_text, (menu_x, HEIGHT // 2 + 80))
+                screen.blit(level_instructions, (menu_x, HEIGHT // 2 + 120))
+                pygame.display.update()
+
+    return algorithm_choice, level_choice
+
+
+
+def start_game_gui():
+    screen = pygame.display.set_mode((WIDTH, HEIGHT))
+    pygame.display.set_caption("Connect 4")
+
+    # Show the menu for algorithm selection
+    algorithm, level = show_menu(screen)
+    print(f"Chosen Algorithm: {algorithm}, Level: {level}")
+
+    board = initialize_board()
+    game_over_flag = False
+    human = "x"
+    computer = "o"
+    current_turn = "x"  # Human starts
+
+    # Game loop
+    while not game_over_flag:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+
+            # If it's the human's turn
+            if current_turn == "x":
+                if event.type == pygame.MOUSEMOTION:
+                    pygame.draw.rect(screen, BLACK, (0, 0, WIDTH, SQUARESIZE))
+                    posx = event.pos[0]
+                    pygame.draw.circle(screen, RED, (posx, int(SQUARESIZE / 2)), RADIUS)
+
+                pygame.display.update()
+
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    posx = event.pos[0]
+                    col = int(posx // SQUARESIZE)
+
+                    if board[0][col] == "_":
+                        row = drop_chip(board, col, current_turn)
+
+                        if game_over(board):
+                            game_over_flag = True
+                        else:
+                            current_turn = "o" if current_turn == "x" else "x"  # Switch turn
+
+            # If it's the computer's turn
+            elif current_turn == "o":
+                pygame.draw.rect(screen, BLACK, (0, 0, WIDTH, SQUARESIZE))
+                pygame.display.update()
+
+                best_col, move_scores = best_move(board, level, algo=algorithm, show=True)  # Get best move and scores
+                if best_col != -1:
+                    row_placed = drop_chip(board, best_col, computer)  # Place computer's chip
+                    # print(f"Computer placed chip in column {best_col}, row {row_placed}")
+                    print(f"Move scores: {move_scores}")  # Optional: Display scores for all columns
+
+                if game_over(board):
+                    game_over_flag = True
+                else:
+                    current_turn = "x"  # Switch turn back to human
+
+        # Draw the board after every update
+        draw_board(board, screen)
+    human_score = calculate_score(board, human)
+    computer_score = calculate_score(board, computer)
+
+    print("Game Over!")
+    print(f"Final Score - Human: {human_score} | Computer: {computer_score}")
+
+    if human_score > computer_score:
+        print("Human wins!")
+    elif computer_score > human_score:
+        print("Computer wins!")
+    else:
+        print("It's a tie!")
+
 def start_game(board, row, col):
     """Starts the Connect 4 game loop."""
     board = initialize_board(board, row, col)
@@ -415,8 +636,12 @@ def start_game(board, row, col):
         print("It's a tie!")
     
 if __name__ == "__main__":
-    rows = 6  # Typical for Connect 4
-    cols = 7  # 7 columns for Connect 4
-    board: list[list] = []
+    # Initialize pygame
+    
+
+    # rows = 6  # Typical for Connect 4
+    # cols = 7  # 7 columns for Connect 4
+    # board: list[list] = []
     expanded_nodes= 0
-    start_game(board, rows, cols)
+    start_game_gui()
+    # start_game(board, rows, cols)
