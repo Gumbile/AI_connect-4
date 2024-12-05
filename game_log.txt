@@ -1,877 +1,487 @@
-Choose AI Algorithm:
-1. Minimax
-2. Alpha-Beta Pruning Minimax
-3. Expected Minimax
-Enter your choice (1/2/3): Enter truncation level: _ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-Turn 1
-Enter your play (column number): 
-Human placed chip in column 3, row 5
-Human Score: 0 | Computer Score: 0
---------------------------------------------
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ x _ _ _
-Turn 2
-Computer is thinking...
 Game Tree for column: 0
-Max (Chip placed at column = 0): Node at depth = 0: Heuristic Value: 0
-  Min (Chip placed at column = 0): Node at depth = 1: Heuristic Value: 2
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 7
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 7
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 2
-  Min (Chip placed at column = 1): Node at depth = 1: Heuristic Value: 0
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 4
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 3
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 0
-  Min (Chip placed at column = 2): Node at depth = 1: Heuristic Value: 0
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 0
-  Min (Chip placed at column = 3): Node at depth = 1: Heuristic Value: 3
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 7
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 3
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 8
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 3
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 3
-  Min (Chip placed at column = 4): Node at depth = 1: Heuristic Value: 0
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 0
-  Min (Chip placed at column = 5): Node at depth = 1: Heuristic Value: 0
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 3
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 0
-  Min (Chip placed at column = 6): Node at depth = 1: Heuristic Value: 0
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 3
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 2
+Max (Chip placed at column = 0): Node at depth = 0: Heuristic Value: 53
+  Min (Chip placed at column = 0): Node at depth = 1: Heuristic Value: 56
+  Min (Chip placed at column = 1): Node at depth = 1: Heuristic Value: 53
+  Min (Chip placed at column = 2): Node at depth = 1: Heuristic Value: 56
+  Min (Chip placed at column = 3): Node at depth = 1: Heuristic Value: 59
+  Min (Chip placed at column = 4): Node at depth = 1: Heuristic Value: 56
+  Min (Chip placed at column = 5): Node at depth = 1: Heuristic Value: 53
+  Min (Chip placed at column = 6): Node at depth = 1: Heuristic Value: 53
 ------------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 3, Beta: 3
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-o x _ x _ _ _
-    -----------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 3, Beta: 3
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-o _ x x _ _ _
-    -----------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 3, Beta: 3
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ x _ _ _
-o _ _ x _ _ _
-    -----------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 3, Beta: 3
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-o _ _ x x _ _
-    -----------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 3, Beta: 3
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-o _ _ x _ x _
-    -----------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 3, Beta: 3
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-o _ _ x _ _ x
-    -----------------------------
 Game Tree for column: 1
-Max (Chip placed at column = 1): Node at depth = 0: Heuristic Value: 0
-  Min (Chip placed at column = 0): Node at depth = 1: Heuristic Value: 0
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 4
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 3
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 0
-  Min (Chip placed at column = 1): Node at depth = 1: Heuristic Value: 2
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 4
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 7
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 9
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 2
-  Min (Chip placed at column = 2): Node at depth = 1: Heuristic Value: 0
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 4
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 0
-  Min (Chip placed at column = 3): Node at depth = 1: Heuristic Value: 3
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 3
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 9
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 10
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 3
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 3
-  Min (Chip placed at column = 4): Node at depth = 1: Heuristic Value: 0
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 0
-  Min (Chip placed at column = 5): Node at depth = 1: Heuristic Value: 0
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 3
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 0
-  Min (Chip placed at column = 6): Node at depth = 1: Heuristic Value: 0
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 3
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 2
+Max (Chip placed at column = 1): Node at depth = 0: Heuristic Value: 50
+  Min (Chip placed at column = 0): Node at depth = 1: Heuristic Value: 53
+  Min (Chip placed at column = 1): Node at depth = 1: Heuristic Value: 56
+  Min (Chip placed at column = 2): Node at depth = 1: Heuristic Value: 53
+  Min (Chip placed at column = 3): Node at depth = 1: Heuristic Value: 53
+  Min (Chip placed at column = 4): Node at depth = 1: Heuristic Value: 53
+  Min (Chip placed at column = 5): Node at depth = 1: Heuristic Value: 50
+  Min (Chip placed at column = 6): Node at depth = 1: Heuristic Value: 50
 ------------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 3, Beta: 3
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ x _ _ _ _ _
-_ o _ x _ _ _
-    -----------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 3, Beta: 3
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ o x x _ _ _
-    -----------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 5, Beta: 3
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ x _ _ _
-_ o _ x _ _ _
-    -----------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 3, Beta: 3
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ o _ x x _ _
-    -----------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 3, Beta: 3
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ o _ x _ x _
-    -----------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 3, Beta: 3
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ o _ x _ _ x
-    -----------------------------
 Game Tree for column: 2
-Max (Chip placed at column = 2): Node at depth = 0: Heuristic Value: 0
-  Min (Chip placed at column = 0): Node at depth = 1: Heuristic Value: 0
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 0
-  Min (Chip placed at column = 1): Node at depth = 1: Heuristic Value: 0
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 4
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 0
-  Min (Chip placed at column = 2): Node at depth = 1: Heuristic Value: 2
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 4
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 7
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 13
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 2
-  Min (Chip placed at column = 3): Node at depth = 1: Heuristic Value: 5
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 13
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 10
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 7
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 5
-  Min (Chip placed at column = 4): Node at depth = 1: Heuristic Value: 0
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 7
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 0
-  Min (Chip placed at column = 5): Node at depth = 1: Heuristic Value: 0
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 0
-  Min (Chip placed at column = 6): Node at depth = 1: Heuristic Value: 0
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 2
+Max (Chip placed at column = 2): Node at depth = 0: Heuristic Value: 50
+  Min (Chip placed at column = 0): Node at depth = 1: Heuristic Value: 56
+  Min (Chip placed at column = 1): Node at depth = 1: Heuristic Value: 53
+  Min (Chip placed at column = 2): Node at depth = 1: Heuristic Value: 59
+  Min (Chip placed at column = 3): Node at depth = 1: Heuristic Value: 62
+  Min (Chip placed at column = 4): Node at depth = 1: Heuristic Value: 59
+  Min (Chip placed at column = 5): Node at depth = 1: Heuristic Value: 50
+  Min (Chip placed at column = 6): Node at depth = 1: Heuristic Value: 50
 ------------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 5, Beta: 5
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ x o x _ _ _
-    -----------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 5, Beta: 5
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ x _ _ _ _
-_ _ o x _ _ _
-    -----------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 5, Beta: 3
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ o x x _ _
-    -----------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 5, Beta: 3
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ o x _ x _
-    -----------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 5, Beta: 3
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ o x _ _ x
-    -----------------------------
 Game Tree for column: 3
-Max (Chip placed at column = 3): Node at depth = 0: Heuristic Value: 3
-  Min (Chip placed at column = 0): Node at depth = 1: Heuristic Value: 3
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 7
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 3
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 8
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 3
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 3
-  Min (Chip placed at column = 1): Node at depth = 1: Heuristic Value: 3
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 3
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 9
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 10
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 3
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 3
-  Min (Chip placed at column = 2): Node at depth = 1: Heuristic Value: 5
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 13
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 10
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 7
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 5
-  Min (Chip placed at column = 3): Node at depth = 1: Heuristic Value: 8
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 8
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 10
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 10
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 16
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 10
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 10
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 8
-  Min (Chip placed at column = 4): Node at depth = 1: Heuristic Value: 5
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 7
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 10
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 13
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 5
-  Min (Chip placed at column = 5): Node at depth = 1: Heuristic Value: 3
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 3
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 3
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 10
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 9
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 3
-  Min (Chip placed at column = 6): Node at depth = 1: Heuristic Value: 3
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 3
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 3
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 8
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 3
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 7
+Max (Chip placed at column = 3): Node at depth = 0: Heuristic Value: 53
+  Min (Chip placed at column = 0): Node at depth = 1: Heuristic Value: 59
+  Min (Chip placed at column = 1): Node at depth = 1: Heuristic Value: 53
+  Min (Chip placed at column = 2): Node at depth = 1: Heuristic Value: 62
+  Min (Chip placed at column = 3): Node at depth = 1: Heuristic Value: 56
+  Min (Chip placed at column = 4): Node at depth = 1: Heuristic Value: 65
+  Min (Chip placed at column = 5): Node at depth = 1: Heuristic Value: 53
+  Min (Chip placed at column = 6): Node at depth = 1: Heuristic Value: 56
 ------------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 8, Beta: 8
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ o _ _ _
-_ x _ x _ _ _
-    -----------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 2
-    Alpha: 9, Beta: 8
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ o _ _ _
-_ _ x x _ _ _
-    -----------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 8, Beta: 6
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ o _ _ _
-_ _ _ x x _ _
-    -----------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 8, Beta: 6
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ o _ _ _
-_ _ _ x _ x _
-    -----------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 8, Beta: 6
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ o _ _ _
-_ _ _ x _ _ x
-    -----------------------------
 Game Tree for column: 4
-Max (Chip placed at column = 4): Node at depth = 0: Heuristic Value: 0
-  Min (Chip placed at column = 0): Node at depth = 1: Heuristic Value: 0
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 0
-  Min (Chip placed at column = 1): Node at depth = 1: Heuristic Value: 0
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 0
-  Min (Chip placed at column = 2): Node at depth = 1: Heuristic Value: 0
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 7
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 0
-  Min (Chip placed at column = 3): Node at depth = 1: Heuristic Value: 5
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 7
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 10
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 13
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 5
-  Min (Chip placed at column = 4): Node at depth = 1: Heuristic Value: 2
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 13
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 7
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 4
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 2
-  Min (Chip placed at column = 5): Node at depth = 1: Heuristic Value: 0
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 4
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 0
-  Min (Chip placed at column = 6): Node at depth = 1: Heuristic Value: 0
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 2
+Max (Chip placed at column = 4): Node at depth = 0: Heuristic Value: 53
+  Min (Chip placed at column = 0): Node at depth = 1: Heuristic Value: 56
+  Min (Chip placed at column = 1): Node at depth = 1: Heuristic Value: 53
+  Min (Chip placed at column = 2): Node at depth = 1: Heuristic Value: 59
+  Min (Chip placed at column = 3): Node at depth = 1: Heuristic Value: 65
+  Min (Chip placed at column = 4): Node at depth = 1: Heuristic Value: 56
+  Min (Chip placed at column = 5): Node at depth = 1: Heuristic Value: 56
+  Min (Chip placed at column = 6): Node at depth = 1: Heuristic Value: 56
 ------------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 5, Beta: 5
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ x _ x o _ _
-    -----------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 5, Beta: 5
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ x x o _ _
-    -----------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 5, Beta: 3
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ x _ _
-_ _ _ x o _ _
-    -----------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 5, Beta: 3
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ x o x _
-    -----------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 5, Beta: 3
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ x o _ x
-    -----------------------------
 Game Tree for column: 5
-Max (Chip placed at column = 5): Node at depth = 0: Heuristic Value: 0
-  Min (Chip placed at column = 0): Node at depth = 1: Heuristic Value: 0
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 3
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 0
-  Min (Chip placed at column = 1): Node at depth = 1: Heuristic Value: 0
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 3
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 0
-  Min (Chip placed at column = 2): Node at depth = 1: Heuristic Value: 0
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 0
-  Min (Chip placed at column = 3): Node at depth = 1: Heuristic Value: 3
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 3
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 3
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 10
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 9
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 3
-  Min (Chip placed at column = 4): Node at depth = 1: Heuristic Value: 0
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 4
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 0
-  Min (Chip placed at column = 5): Node at depth = 1: Heuristic Value: 2
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 9
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 7
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 4
-  Min (Chip placed at column = 6): Node at depth = 1: Heuristic Value: 0
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 3
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 4
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 2
+Max (Chip placed at column = 5): Node at depth = 0: Heuristic Value: 50
+  Min (Chip placed at column = 0): Node at depth = 1: Heuristic Value: 53
+  Min (Chip placed at column = 1): Node at depth = 1: Heuristic Value: 50
+  Min (Chip placed at column = 2): Node at depth = 1: Heuristic Value: 50
+  Min (Chip placed at column = 3): Node at depth = 1: Heuristic Value: 53
+  Min (Chip placed at column = 4): Node at depth = 1: Heuristic Value: 56
+  Min (Chip placed at column = 5): Node at depth = 1: Heuristic Value: 53
+  Min (Chip placed at column = 6): Node at depth = 1: Heuristic Value: 50
 ------------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 3, Beta: 3
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ x _ x _ o _
-    -----------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 3, Beta: 3
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ x x _ o _
-    -----------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 5, Beta: 3
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ x _ _ _
-_ _ _ x _ o _
-    -----------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 3, Beta: 3
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ x x o _
-    -----------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 3, Beta: 3
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ x _
-_ _ _ x _ o _
-    -----------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 3, Beta: 3
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ x _ o x
-    -----------------------------
 Game Tree for column: 6
-Max (Chip placed at column = 6): Node at depth = 0: Heuristic Value: 0
-  Min (Chip placed at column = 0): Node at depth = 1: Heuristic Value: 0
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 3
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 2
-  Min (Chip placed at column = 1): Node at depth = 1: Heuristic Value: 0
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 3
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 2
-  Min (Chip placed at column = 2): Node at depth = 1: Heuristic Value: 0
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 2
-  Min (Chip placed at column = 3): Node at depth = 1: Heuristic Value: 3
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 3
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 3
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 8
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 3
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 7
-  Min (Chip placed at column = 4): Node at depth = 1: Heuristic Value: 0
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 5
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 2
-  Min (Chip placed at column = 5): Node at depth = 1: Heuristic Value: 0
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 3
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 0
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 4
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 2
-  Min (Chip placed at column = 6): Node at depth = 1: Heuristic Value: 2
-    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 7
-    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 2
-    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 7
+Max (Chip placed at column = 6): Node at depth = 0: Heuristic Value: 50
+  Min (Chip placed at column = 0): Node at depth = 1: Heuristic Value: 53
+  Min (Chip placed at column = 1): Node at depth = 1: Heuristic Value: 50
+  Min (Chip placed at column = 2): Node at depth = 1: Heuristic Value: 50
+  Min (Chip placed at column = 3): Node at depth = 1: Heuristic Value: 56
+  Min (Chip placed at column = 4): Node at depth = 1: Heuristic Value: 56
+  Min (Chip placed at column = 5): Node at depth = 1: Heuristic Value: 50
+  Min (Chip placed at column = 6): Node at depth = 1: Heuristic Value: 53
 ------------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 3, Beta: 3
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ x _ x _ _ o
-    -----------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 3, Beta: 3
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ x x _ _ o
-    -----------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 3, Beta: 3
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ x _ _ _
-_ _ _ x _ _ o
-    -----------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 3, Beta: 3
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ x x _ o
-    -----------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 3, Beta: 3
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ x _ x o
-    -----------------------------
-Pruning at Depth 1 (Maximizing Player):
-    Column considered: 3
-    Alpha: 3, Beta: 3
-    State of board before pruning:
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ x
-_ _ _ x _ _ o
-    -----------------------------
-Computer placed chip in column 3, row 4
-Move scores: [(0, 3), (1, 3), (2, 3), (3, 6), (4, 3), (5, 3), (6, 3)]
-Human Score: 0 | Computer Score: 0
---------------------------------------------
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ _ _ _ _
-_ _ _ o _ _ _
-_ _ _ x _ _ _
-Turn 3
-Enter your play (column number): 
+Time taken: 0.0987 seconds
+Nodes expanded: 57
+Game Tree for column: 0
+Max (Chip placed at column = 0): Node at depth = 0: Heuristic Value: 50
+  Min (Chip placed at column = 0): Node at depth = 1: Heuristic Value: 53
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 53
+  Min (Chip placed at column = 1): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 50
+  Min (Chip placed at column = 2): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 50
+  Min (Chip placed at column = 3): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 50
+  Min (Chip placed at column = 4): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 50
+  Min (Chip placed at column = 5): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 50
+  Min (Chip placed at column = 6): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 53
+------------------------------
+Game Tree for column: 1
+Max (Chip placed at column = 1): Node at depth = 0: Heuristic Value: 50
+  Min (Chip placed at column = 0): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 50
+  Min (Chip placed at column = 1): Node at depth = 1: Heuristic Value: 53
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 59
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 53
+  Min (Chip placed at column = 2): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 50
+  Min (Chip placed at column = 3): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 59
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 50
+  Min (Chip placed at column = 4): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 50
+  Min (Chip placed at column = 5): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 50
+  Min (Chip placed at column = 6): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 53
+------------------------------
+Game Tree for column: 2
+Max (Chip placed at column = 2): Node at depth = 0: Heuristic Value: 50
+  Min (Chip placed at column = 0): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 50
+  Min (Chip placed at column = 1): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 50
+  Min (Chip placed at column = 2): Node at depth = 1: Heuristic Value: 53
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 65
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 53
+  Min (Chip placed at column = 3): Node at depth = 1: Heuristic Value: 53
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 65
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 53
+  Min (Chip placed at column = 4): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 50
+  Min (Chip placed at column = 5): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 50
+  Min (Chip placed at column = 6): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 53
+------------------------------
+Game Tree for column: 3
+Max (Chip placed at column = 3): Node at depth = 0: Heuristic Value: 50
+  Min (Chip placed at column = 0): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 50
+  Min (Chip placed at column = 1): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 59
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 50
+  Min (Chip placed at column = 2): Node at depth = 1: Heuristic Value: 53
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 65
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 53
+  Min (Chip placed at column = 3): Node at depth = 1: Heuristic Value: 53
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 53
+  Min (Chip placed at column = 4): Node at depth = 1: Heuristic Value: 53
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 65
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 53
+  Min (Chip placed at column = 5): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 59
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 50
+  Min (Chip placed at column = 6): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 56
+------------------------------
+Game Tree for column: 4
+Max (Chip placed at column = 4): Node at depth = 0: Heuristic Value: 50
+  Min (Chip placed at column = 0): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 50
+  Min (Chip placed at column = 1): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 50
+  Min (Chip placed at column = 2): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 50
+  Min (Chip placed at column = 3): Node at depth = 1: Heuristic Value: 53
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 65
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 53
+  Min (Chip placed at column = 4): Node at depth = 1: Heuristic Value: 53
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 65
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 53
+  Min (Chip placed at column = 5): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 50
+  Min (Chip placed at column = 6): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 53
+------------------------------
+Game Tree for column: 5
+Max (Chip placed at column = 5): Node at depth = 0: Heuristic Value: 50
+  Min (Chip placed at column = 0): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 50
+  Min (Chip placed at column = 1): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 50
+  Min (Chip placed at column = 2): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 50
+  Min (Chip placed at column = 3): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 59
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 50
+  Min (Chip placed at column = 4): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 50
+  Min (Chip placed at column = 5): Node at depth = 1: Heuristic Value: 53
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 59
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 56
+  Min (Chip placed at column = 6): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 53
+------------------------------
+Game Tree for column: 6
+Max (Chip placed at column = 6): Node at depth = 0: Heuristic Value: 50
+  Min (Chip placed at column = 0): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 53
+  Min (Chip placed at column = 1): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 53
+  Min (Chip placed at column = 2): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 53
+  Min (Chip placed at column = 3): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 56
+  Min (Chip placed at column = 4): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 53
+  Min (Chip placed at column = 5): Node at depth = 1: Heuristic Value: 50
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 50
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 53
+  Min (Chip placed at column = 6): Node at depth = 1: Heuristic Value: 53
+    Max (Chip placed at column = 0): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 1): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 2): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 3): Node at depth = 2: Heuristic Value: 56
+    Max (Chip placed at column = 4): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 5): Node at depth = 2: Heuristic Value: 53
+    Max (Chip placed at column = 6): Node at depth = 2: Heuristic Value: 56
+------------------------------
+Time taken: 0.3715 seconds
+Nodes expanded: 400

@@ -2,7 +2,8 @@ import copy
 import time
 import pygame
 import sys
-
+import tkinter as tk
+import math
 
 pygame.init()   
 pygame.font.init()  # Explicitly initialize the font module
@@ -23,6 +24,58 @@ WHITE = (255, 255, 255)
 # Fonts
 FONT = pygame.font.SysFont("monospace", 75)
 SMALL_FONT = pygame.font.SysFont("monospace", 40)
+
+
+class TreeVisualizer:
+    def __init__(self, root):
+        self.root = root
+        self.canvas = tk.Canvas(root, width=1200, height=800, bg='white')
+        self.canvas.pack(expand=True, fill='both')
+        
+        # Visual parameters
+        self.node_radius = 25
+        self.vertical_gap = 100
+        self.horizontal_spacing = 80
+        
+    def draw_node(self, x, y, value, is_max, column=None):
+        # Draw circle
+        self.canvas.create_oval(x-self.node_radius, y-self.node_radius,
+                              x+self.node_radius, y+self.node_radius,
+                              fill='lightblue')
+        
+        # Draw value
+        self.canvas.create_text(x, y, text=str(value))
+        
+        # Draw Max/Min and column info
+        label = "Max" if is_max else "Min"
+        if column is not None:
+            label += f" (Col:{column})"
+        self.canvas.create_text(x, y-self.node_radius-10, text=label)
+        
+    def draw_line(self, x1, y1, x2, y2):
+        self.canvas.create_line(x1, y1, x2, y2)
+        
+    def visualize_tree(self, node, x, y, is_max=True):
+        self.draw_node(x, y, node['value'], is_max, node.get('column'))
+        
+        if node['children']:
+            num_children = len(node['children'])
+            total_width = (num_children - 1) * self.horizontal_spacing
+            start_x = x - total_width/2
+            
+            for i, child in enumerate(node['children']):
+                child_x = start_x + i * self.horizontal_spacing
+                child_y = y + self.vertical_gap
+                self.draw_line(x, y+self.node_radius, child_x, child_y-self.node_radius)
+                self.visualize_tree(child, child_x, child_y, not is_max)
+
+def show_tree(tree):
+    root = tk.Tk()
+    root.title("Minimax Tree Visualization")
+    viz = TreeVisualizer(root)
+    viz.visualize_tree(tree, 600, 50)  # Start at center-top
+    root.mainloop()
+
 
 
 def draw_board(board, screen):
@@ -543,48 +596,62 @@ def game_over(board):
     return True
 
 def best_move(board, level, algo="minimax", show=False): 
-
-    best_col = -1
-    best_value = float("-inf")
-    global expanded_nodes
-    expanded_nodes = 0 
+    board_copy = copy.deepcopy(board)
+    level = level - 1
     start = time.time()
-    board_copy = copy.deepcopy(board)  
-    move_scores = [] 
-    level = level -1 
+    global expanded_nodes
+    expanded_nodes = 0
 
+    # Create root node representing current board state
+    root_node = {
+        'value': evaluate_heuristic(board, "o"),
+        'children': [],
+        'column': None
+    }
+
+    # Generate children for all valid moves
     for col in range(len(board[0])):
-        if board_copy[0][col] == "_":  
-            row = drop_chip(board_copy, col, "o")  
+        if board_copy[0][col] == "_":
+            board_after_move = copy.deepcopy(board_copy)
+            row = drop_chip(board_after_move, col, "o")
 
             if algo == "minimax":
-                result = minimax(board_copy, level, False, "o", column=col)
-                move_value = result['value']  
+                result = minimax(board_after_move, level, False, "o", column=col)
             elif algo == "alpha_beta":
-                result = AlphaBeta_Minimax(board_copy, level, False, "o", float("-inf"), float("inf"), column=col)
-                move_value = result['value']  
+                result = AlphaBeta_Minimax(board_after_move, level, False, "o", float("-inf"), float("inf"), column=col)
             elif algo == "expected_minimax":
-                result = expected_minimax(board_copy, level , False , "o",column=col)
-                move_value = result['value'] 
-            else:
-                move_value = float("-inf")  
-
-            game_tree = create_tree(board_copy, level, False, "o", column=col)
-            if show:
-                print(f"Game Tree for column: {col}")
-                print_tree(game_tree, maximizing_player=True, column=col)
-                print("-" * 30)
+                result = expected_minimax(board_after_move, level, False, "o", column=col)
             
-            move_scores.append((col, move_value))  
-            board_copy[row][col] = "_"  
+            # Create child node and its subtree
+            child_tree = create_tree(board_after_move, level, False, "o", column=col)
+            root_node['children'].append(child_tree)
 
-            if move_value > best_value:
-                best_value = move_value
-                best_col = col
+            board_copy[row][col] = "_"  # Reset the move
+
+    # Find best move from children
+    best_col = -1
+    best_value = float("-inf")
+    move_scores = []
+
+    for i, child in enumerate(root_node['children']):
+        col = child['column']
+        move_value = child['value']
+        move_scores.append((col, move_value))
+
+        if move_value > best_value:
+            best_value = move_value
+            best_col = col
+
+    if show:
+        print("Complete Game Tree:")
+        print_tree(root_node, maximizing_player=True)
+        show_tree(root_node)
+
     end = time.time()
     total_time = end - start
     print(f"Time taken: {total_time:.4f} seconds")
     print(f"Nodes expanded: {expanded_nodes + 1}")
+    
     return (best_col, move_scores)
 
 

@@ -352,7 +352,7 @@ def start_game(board, row, col, K):
         print_board(board)  # Display board before the turn
         print(f"Turn {turn + 1}")
 
-        if turn % 2 == 0:  # Human's turn
+        if turn % 2 == 1:  # Human's turn
             print("Enter your play (column number): ")
             play_col = int(input())  # Get column number from human
             while play_col < 0 or play_col >= col or board[0][play_col] != "_":
@@ -393,7 +393,7 @@ def start_game(board, row, col, K):
     else:
         print("It's a tie!")
 if __name__ == "__main__":
-    row = 7  # For Connect 4, typically 6 rows
+    row = 6  # For Connect 4, typically 6 rows
     col = 7  # 7 columns for Connect 4
     board: list[list] = []
 
