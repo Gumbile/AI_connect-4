@@ -57,15 +57,15 @@ def draw_board(board, screen):
 
     pygame.display.update()
 
-def print_tree(node, depth=0, maximizing_player=None, column=None):
-    if node is None:
-        return
-    indent = '  ' * depth  # Indent to represent tree depth
-    move_type = "Max" if maximizing_player else "Min"
-    col_info = f" (Chip placed at column = {column})" if column is not None else ""
-    print(f'{indent}{move_type}{col_info}: Node at depth = {depth}: Heuristic Value: {node["value"]}')
-    for i, child in enumerate(node['children']):
-        print_tree(child, depth + 1, not maximizing_player, child.get('column')) 
+# def print_tree(node, depth=0, maximizing_player=None, column=None):
+#     if node is None:
+#         return
+#     indent = '  ' * depth  # Indent to represent tree depth
+#     move_type = "Max" if maximizing_player else "Min"
+#     col_info = f" (Chip placed at column = {column})" if column is not None else ""
+#     print(f'{indent}{move_type}{col_info}: Node at depth = {depth}: Heuristic Value: {node["value"]}')
+#     for i, child in enumerate(node['children']):
+#         print_tree(child, depth + 1, not maximizing_player, child.get('column')) 
 
 def create_tree(board, depth, maximizing_player, player, column=None):
     if depth == 0 or game_over(board):
@@ -542,52 +542,67 @@ def game_over(board):
             return False
     return True
 
-def best_move(board, level, algo="minimax", show=False): 
+def log_to_file(message, filename="game_log.txt"):
+    """Write message to file in append mode"""
+    with open(filename, 'a') as f:
+        f.write(f"{message}\n")
 
+def best_move(board, level, algo="minimax", show=False):
     best_col = -1
     best_value = float("-inf")
     global expanded_nodes
-    expanded_nodes = 0 
+    expanded_nodes = 0
     start = time.time()
-    board_copy = copy.deepcopy(board)  
-    move_scores = [] 
-    level = level -1 
+    board_copy = copy.deepcopy(board)
+    move_scores = []
+    level = level - 1
 
     for col in range(len(board[0])):
-        if board_copy[0][col] == "_":  
-            row = drop_chip(board_copy, col, "o")  
+        if board_copy[0][col] == "_":
+            row = drop_chip(board_copy, col, "o")
 
             if algo == "minimax":
                 result = minimax(board_copy, level, False, "o", column=col)
-                move_value = result['value']  
+                move_value = result['value']
             elif algo == "alpha_beta":
                 result = AlphaBeta_Minimax(board_copy, level, False, "o", float("-inf"), float("inf"), column=col)
-                move_value = result['value']  
+                move_value = result['value']
             elif algo == "expected_minimax":
-                result = expected_minimax(board_copy, level , False , "o",column=col)
-                move_value = result['value'] 
+                result = expected_minimax(board_copy, level, False, "o", column=col)
+                move_value = result['value']
             else:
-                move_value = float("-inf")  
+                move_value = float("-inf")
 
             game_tree = create_tree(board_copy, level, False, "o", column=col)
             if show:
-                print(f"Game Tree for column: {col}")
+                log_to_file(f"Game Tree for column: {col}")
                 print_tree(game_tree, maximizing_player=True, column=col)
-                print("-" * 30)
-            
-            move_scores.append((col, move_value))  
-            board_copy[row][col] = "_"  
+                log_to_file("-" * 30)
+
+            move_scores.append((col, move_value))
+            board_copy[row][col] = "_"
 
             if move_value > best_value:
                 best_value = move_value
                 best_col = col
+
     end = time.time()
     total_time = end - start
-    print(f"Time taken: {total_time:.4f} seconds")
-    print(f"Nodes expanded: {expanded_nodes + 1}")
+    log_to_file(f"Time taken: {total_time:.4f} seconds")
+    log_to_file(f"Nodes expanded: {expanded_nodes + 1}")
     return (best_col, move_scores)
 
+def print_tree(node, depth=0, maximizing_player=None, column=None):
+    if node is None:
+        return
+    indent = '  ' * depth
+    move_type = "Max" if maximizing_player else "Min"
+    col_info = f" (Chip placed at column = {column})" if column is not None else ""
+    log_to_file(f'{indent}{move_type}{col_info}: Node at depth = {depth}: Heuristic Value: {node["value"]}')
+    for i, child in enumerate(node['children']):
+        print_tree(child, depth + 1, not maximizing_player, child.get('column'))
 
+# Rest of the code remains unchanged
 def show_menu(screen):
     # Initialize level_choice with a default value
     level_choice = 3  # Default level set to 3

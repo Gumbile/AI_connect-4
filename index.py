@@ -230,3 +230,55 @@ if __name__ == "__main__":
     board: list[list] = []
 
     start_game(board, row, col)
+# def evaluate_heuristic(board, player):
+#     """Evaluate the board state using heuristic scoring."""
+#     score = 0
+#     opponent = "x" if player == "o" else "o"
+    
+#     # 1. Check connected pieces
+#     # Horizontal
+#     for row in range(len(board)):
+#         for col in range(len(board[0]) - 3):
+#             window = [board[row][col + i] for i in range(4)]
+#             score += evaluate_window(window, player, opponent)
+
+#     # Vertical
+#     for row in range(len(board) - 3):
+#         for col in range(len(board[0])):
+#             window = [board[row + i][col] for i in range(4)]
+#             score += evaluate_window(window, player, opponent)
+
+#     # Diagonal (positive slope)
+#     for row in range(len(board) - 3):
+#         for col in range(len(board[0]) - 3):
+#             window = [board[row + i][col + i] for i in range(4)]
+#             score += evaluate_window(window, player, opponent)
+
+#     # Diagonal (negative slope)
+#     for row in range(3, len(board)):
+#         for col in range(len(board[0]) - 3):
+#             window = [board[row - i][col + i] for i in range(4)]
+#             score += evaluate_window(window, player, opponent)
+
+#     # Center control preference
+#     center_col = len(board[0]) // 2
+#     center_array = [board[row][center_col] for row in range(len(board))]
+#     score += center_array.count(player) * 3
+
+#     return score
+
+# def evaluate_window(window, player, opponent):
+#     """Evaluate a window of 4 positions."""
+#     score = 0
+    
+#     if window.count(player) == 4:
+#         score += 100
+#     elif window.count(player) == 3 and window.count("_") == 1:
+#         score += 5
+#     elif window.count(player) == 2 and window.count("_") == 2:
+#         score += 2
+
+#     if window.count(opponent) == 3 and window.count("_") == 1:
+#         score -= 4
+
+#     return score
