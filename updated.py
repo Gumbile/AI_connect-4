@@ -1,4 +1,5 @@
 import copy
+import time
 
 def print_tree(node, depth=0, maximizing_player=None, column=None):
     if node is None:
@@ -294,7 +295,6 @@ def expected_minimax(board, depth, maximizing_player, player, column=None):
 
         return {'value': min_eval, 'children': children, 'column': column}
 
-
 def game_over(board):
     """Checks if the game is over (either player has won or the board is full)."""
     for col in range(len(board[0])):
@@ -308,7 +308,7 @@ def best_move(board, level, algo="minimax", show=False):
     best_value = float("-inf")
     global expanded_nodes
     expanded_nodes = 0 
-
+    start = time.time()
     board_copy = copy.deepcopy(board)  
     move_scores = []  
 
@@ -340,6 +340,9 @@ def best_move(board, level, algo="minimax", show=False):
             if move_value > best_value:
                 best_value = move_value
                 best_col = col
+    end = time.time()
+    total_time = end - start
+    print(f"Time taken: {total_time:.4f} seconds")
     print(f"Nodes expanded: {expanded_nodes}")
     return (best_col, move_scores)
 
