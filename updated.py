@@ -1,5 +1,4 @@
 import copy
-import sys
 
 def print_tree(node, depth=0, maximizing_player=None, column=None):
     if node is None:
@@ -141,6 +140,8 @@ def evaluate_window(window, player, opponent):
     return score
 
 def AlphaBeta_Minimax(board, depth, maximizing_player, player, alpha, beta, column=None):
+    global expanded_nodes
+    expanded_nodes += 1
     if depth == 0 or game_over(board):
         if game_over(board):
             player_score = calculate_score(board, "x")
@@ -189,6 +190,8 @@ def AlphaBeta_Minimax(board, depth, maximizing_player, player, alpha, beta, colu
         return {'value': min_eval, 'children': children, 'column': column}
 
 def minimax(board, depth, maximizing_player, player, column=None):
+    global expanded_nodes
+    expanded_nodes += 1
     if depth == 0 or game_over(board):
         if game_over(board):
             player_score = calculate_score(board, "x")
@@ -224,7 +227,8 @@ def minimax(board, depth, maximizing_player, player, column=None):
         return {'value': min_eval, 'children': children, 'column': column}
     
 def expected_minimax(board, depth, maximizing_player, player, column=None):
-   
+    global expanded_nodes
+    expanded_nodes += 1
     if depth == 0 or game_over(board):
         if game_over(board):
             player_score = calculate_score(board, "x")
@@ -258,8 +262,8 @@ def expected_minimax(board, depth, maximizing_player, player, column=None):
             max_eval = max(max_eval, expected_value)
 
             print(f"Maximizing Player (Depth {depth}):")
-            print(f"    Column: {col}, Expected Value: {expected_value}, Max Eval So Far: {max_eval}")
-            print(f"    Probs: {probs}")
+            print(f"Column: {col}, Expected Value: {expected_value}, Max Eval So Far: {max_eval}")
+            print(f"Probs: {probs}")
             print("-----------------------------------")
 
         return {'value': max_eval, 'children': children, 'column': column}
@@ -284,8 +288,8 @@ def expected_minimax(board, depth, maximizing_player, player, column=None):
             min_eval = min(min_eval, expected_value)
 
             print(f"Minimizing Player (Depth {depth}):")
-            print(f"    Column: {col}, Expected Value: {expected_value}, Min Eval So Far: {min_eval}")
-            print(f"    Probs: {probs}")
+            print(f"Column: {col}, Expected Value: {expected_value}, Min Eval So Far: {min_eval}")
+            print(f"Probs: {probs}")
             print("-----------------------------------")
 
         return {'value': min_eval, 'children': children, 'column': column}
@@ -302,6 +306,8 @@ def best_move(board, level, algo="minimax", show=False):
 
     best_col = -1
     best_value = float("-inf")
+    global expanded_nodes
+    expanded_nodes = 0 
 
     board_copy = copy.deepcopy(board)  
     move_scores = []  
@@ -334,7 +340,7 @@ def best_move(board, level, algo="minimax", show=False):
             if move_value > best_value:
                 best_value = move_value
                 best_col = col
-
+    print(f"Nodes expanded: {expanded_nodes}")
     return (best_col, move_scores)
 
 def start_game(board, row, col):
@@ -411,5 +417,5 @@ if __name__ == "__main__":
     rows = 6  # Typical for Connect 4
     cols = 7  # 7 columns for Connect 4
     board: list[list] = []
-
+    expanded_nodes= 0
     start_game(board, rows, cols)
