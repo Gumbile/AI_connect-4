@@ -104,7 +104,6 @@ def initialize_board():
     board = [["_" for _ in range(COLS)] for _ in range(ROWS)]
     return board
 
-
 def print_board(board):
     for row in board:
         print(" ".join(row))
@@ -143,231 +142,57 @@ def calculate_score(board, player):
 
     return score
 
-# def evaluate_heuristic(board, player):
-#     """Evaluate the board state using heuristic scoring."""
-#     score = 0
-#     opponent = "x" if player == "o" else "o"
-    
-#     # 1. Check connected pieces
-#     # Horizontal
-#     for row in range(len(board)):
-#         for col in range(len(board[0]) - 3):
-#             window = [board[row][col + i] for i in range(4)]
-#             score += evaluate_window(window, player, opponent)
-
-#     # Vertical
-#     for row in range(len(board) - 3):
-#         for col in range(len(board[0])):
-#             window = [board[row + i][col] for i in range(4)]
-#             score += evaluate_window(window, player, opponent)
-
-#     # Diagonal (positive slope)
-#     for row in range(len(board) - 3):
-#         for col in range(len(board[0]) - 3):
-#             window = [board[row + i][col + i] for i in range(4)]
-#             score += evaluate_window(window, player, opponent)
-
-#     # Diagonal (negative slope)
-#     for row in range(3, len(board)):
-#         for col in range(len(board[0]) - 3):
-#             window = [board[row - i][col + i] for i in range(4)]
-#             score += evaluate_window(window, player, opponent)
-
-#     # Center control preference
-#     center_col = len(board[0]) // 2
-#     center_array = [board[row][center_col] for row in range(len(board))]
-#     score += center_array.count(player) * 3
-
-#     return score
-
-# def evaluate_window(window, player, opponent):
-#     """Evaluate a window of 4 positions."""
-#     score = 0
-    
-#     if window.count(player) == 4:
-#         score += 100
-#     elif window.count(player) == 3 and window.count("_") == 1:
-#         score += 5
-#     elif window.count(player) == 2 and window.count("_") == 2:
-#         score += 2
-
-#     if window.count(opponent) == 3 and window.count("_") == 1:
-#         score -= 4
-
-#     return score
-
-
-
-def count_candidate_points(board, player):
-    """Counts the number of candidate points for the given player (potential 4-in-a-row opportunities)."""
-    candidate_count = 0
-    opponent = "x" if player == "o" else "o"
-    
-    # Horizontal candidate points
-    for row in range(len(board)):
-        for col in range(len(board[0]) - 3):
-            window = [board[row][col + i] for i in range(4)]
-            candidate_count += evaluate_window_for_candidates(window, player, opponent)
-
-    # Vertical candidate points
-    for col in range(len(board[0])):
-        for row in range(len(board) - 3):
-            window = [board[row + i][col] for i in range(4)]
-            candidate_count += evaluate_window_for_candidates(window, player, opponent)
-    
-    # Diagonal candidate points (positive slope)
-    for row in range(len(board) - 3):
-        for col in range(len(board[0]) - 3):
-            window = [board[row + i][col + i] for i in range(4)]
-            candidate_count += evaluate_window_for_candidates(window, player, opponent)
-    
-    # Diagonal candidate points (negative slope)
-    for row in range(3, len(board)):
-        for col in range(len(board[0]) - 3):
-            window = [board[row - i][col + i] for i in range(4)]
-            candidate_count += evaluate_window_for_candidates(window, player, opponent)
-
-    return candidate_count
-
-
-def evaluate_window_for_candidates(window, player, opponent):
-    """Evaluates a window of 4 cells for candidate points."""
-    candidate_points = 0
-    empty_count = window.count("_")
-    
-    # If there are any empty spots, check if the player or opponent can potentially complete the sequence
-    if empty_count > 0:
-        player_count = window.count(player)
-        opponent_count = window.count(opponent)
-        
-        # If the window has the player's pieces and empty spaces, it's a candidate
-        if player_count > 0 and opponent_count == 0:
-            candidate_points += empty_count  # Each empty space is a candidate for the player
-        
-        # If the window has the opponent's pieces and empty spaces, it’s a potential threat (defensive candidate)
-        if opponent_count > 0 and player_count == 0:
-            candidate_points += empty_count  # Count as a candidate to block
-
-    return candidate_points
-
-
-def count_clusters(board, player):
-    """Counts the number of clusters (2 or 3 consecutive pieces) for the given player."""
-    cluster_count = 0
-    
-    # Horizontal clusters
-    for row in range(len(board)):
-        for col in range(len(board[0]) - 3):
-            window = [board[row][col + i] for i in range(4)]
-            cluster_count += evaluate_window_for_clusters(window, player)
-    
-    # Vertical clusters
-    for col in range(len(board[0])):
-        for row in range(len(board) - 3):
-            window = [board[row + i][col] for i in range(4)]
-            cluster_count += evaluate_window_for_clusters(window, player)
-    
-    # Diagonal clusters (positive slope)
-    for row in range(len(board) - 3):
-        for col in range(len(board[0]) - 3):
-            window = [board[row + i][col + i] for i in range(4)]
-            cluster_count += evaluate_window_for_clusters(window, player)
-    
-    # Diagonal clusters (negative slope)
-    for row in range(3, len(board)):
-        for col in range(len(board[0]) - 3):
-            window = [board[row - i][col + i] for i in range(4)]
-            cluster_count += evaluate_window_for_clusters(window, player)
-    
-    return cluster_count
-
-def evaluate_window_for_clusters(window, player):
-    """Evaluates a window of 4 cells for clusters (2 or 3 consecutive pieces)."""
-    cluster_points = 0
-    player_count = window.count(player)
-    empty_count = window.count("_")
-    
-    # If there are 2 or 3 pieces in a row and empty spaces, it's a cluster
-    if player_count == 2 and empty_count == 2:
-        cluster_points += 1  # A potential 2-in-a-row with 2 empty spots
-    elif player_count == 3 and empty_count == 1:
-        cluster_points += 1  # A potential 3-in-a-row with 1 empty spot
-    
-    return cluster_points
-
-def block_opponent_threats(board, opponent):
-    """Counts the number of threats from the opponent (3-in-a-row with 1 empty space) that need to be blocked."""
-    block_count = 0
-    
-    # Horizontal threats
-    for row in range(len(board)):
-        for col in range(len(board[0]) - 3):
-            window = [board[row][col + i] for i in range(4)]
-            block_count += evaluate_window_for_threats(window, opponent)
-    
-    # Vertical threats
-    for col in range(len(board[0])):
-        for row in range(len(board) - 3):
-            window = [board[row + i][col] for i in range(4)]
-            block_count += evaluate_window_for_threats(window, opponent)
-    
-    # Diagonal threats (positive slope)
-    for row in range(len(board) - 3):
-        for col in range(len(board[0]) - 3):
-            window = [board[row + i][col + i] for i in range(4)]
-            block_count += evaluate_window_for_threats(window, opponent)
-    
-    # Diagonal threats (negative slope)
-    for row in range(3, len(board)):
-        for col in range(len(board[0]) - 3):
-            window = [board[row - i][col + i] for i in range(4)]
-            block_count += evaluate_window_for_threats(window, opponent)
-    
-    return block_count
-
-def evaluate_window_for_threats(window, opponent):
-    """Evaluates a window of 4 cells for threats (3 consecutive opponent pieces and 1 empty space)."""
-    threat_points = 0
-    opponent_count = window.count(opponent)
-    empty_count = window.count("_")
-    
-    # A threat is 3 opponent pieces with 1 empty space
-    if opponent_count == 3 and empty_count == 1:
-        threat_points += 1  # This is a potential win for the opponent, so we need to block
-    
-    return threat_points
-
-
 def evaluate_heuristic(board, player):
+    """Evaluate the board state using heuristic scoring."""
     score = 0
     opponent = "x" if player == "o" else "o"
     
-    # 1. Offensive sequences (count 4-in-a-row)
-    score += calculate_score(board, player) * 10  # High weight for offensive sequences
-    
-    # 2. Defensive sequences (block opponent's 4-in-a-row)
-    score -= calculate_score(board, opponent) * 10  # Negative weight for opponent's sequences
-    
-    # 3. Number of candidate points for both players
-    score += count_candidate_points(board, player) * 2
-    score -= count_candidate_points(board, opponent) * 2
-    
-    # 4. Control of the center columns (stronger for central control)
+    # 1. Check connected pieces
+    # Horizontal
+    for row in range(len(board)):
+        for col in range(len(board[0]) - 3):
+            window = [board[row][col + i] for i in range(4)]
+            score += evaluate_window(window, player, opponent)
+
+    # Vertical
+    for row in range(len(board) - 3):
+        for col in range(len(board[0])):
+            window = [board[row + i][col] for i in range(4)]
+            score += evaluate_window(window, player, opponent)
+
+    # Diagonal (positive slope)
+    for row in range(len(board) - 3):
+        for col in range(len(board[0]) - 3):
+            window = [board[row + i][col + i] for i in range(4)]
+            score += evaluate_window(window, player, opponent)
+
+    # Diagonal (negative slope)
+    for row in range(3, len(board)):
+        for col in range(len(board[0]) - 3):
+            window = [board[row - i][col + i] for i in range(4)]
+            score += evaluate_window(window, player, opponent)
+
+    # Center control preference
     center_col = len(board[0]) // 2
-    score += 10 *(board[0][center_col] == player and 5)  # Weight for center column
-    score -= board[0][center_col] == opponent and 5  # Weight for blocking center column
+    center_array = [board[row][center_col] for row in range(len(board))]
+    score += center_array.count(player) * 3
+
+    return score
+
+def evaluate_window(window, player, opponent):
+    """Evaluate a window of 4 positions."""
+    score = 0
     
-    # 5. Clustering of pieces (reward clusters of connected pieces)
-    score += count_clusters(board, player) * 3
-    score -= count_clusters(board, opponent) * 3
-    
-    # 6. Blocking opponent's potential 4-in-a-row
-    score -= block_opponent_threats(board, opponent) * 15  # Higher penalty for blocking
-    
-    # 7. Early vs Late Game Strategy (adjust weights based on depth)
-    if player == "o":  # AI is 'o', so we adjust weights for offensive vs. defensive
-        score += 50 if not game_over(board) else 100  # Late game heavy defense
-    
+    if window.count(player) == 4:
+        score += 100
+    elif window.count(player) == 3 and window.count("_") == 1:
+        score += 5
+    elif window.count(player) == 2 and window.count("_") == 2:
+        score += 2
+
+    if window.count(opponent) == 3 and window.count("_") == 1:
+        score -= 4
+
     return score
 
 def AlphaBeta_Minimax(board, depth, maximizing_player, player, alpha, beta, column=None):
@@ -384,7 +209,6 @@ def AlphaBeta_Minimax(board, depth, maximizing_player, player, alpha, beta, colu
         else:
             value = evaluate_heuristic(board, player)
         
-        # Ensure a consistent dictionary structure
         return {'value': value, 'children': [], 'column': column}
 
     valid_columns = get_empty_columns(board)
@@ -438,7 +262,6 @@ def minimax(board, depth, maximizing_player, player, column=None):
         else:
             value = evaluate_heuristic(board, player)
         
-        # Ensure a consistent dictionary structure
         return {'value': value, 'children': [], 'column': column}
     valid_moves = get_empty_columns(board)
     children = []
@@ -479,7 +302,6 @@ def expected_minimax(board, depth, maximizing_player, player, column=None):
         else:
             value = evaluate_heuristic(board, player)
         
-        # Ensure a consistent dictionary structure
         return {'value': value, 'children': [], 'column': column}
 
     valid_columns = get_empty_columns(board)
@@ -550,15 +372,14 @@ def best_move(board, level, algo="minimax", show=False):
     expanded_nodes = 0 
     start = time.time()
     board_copy = copy.deepcopy(board)  
-    move_scores = [] 
-    level = level -1 
+    move_scores = []  
 
     for col in range(len(board[0])):
         if board_copy[0][col] == "_":  
             row = drop_chip(board_copy, col, "o")  
 
             if algo == "minimax":
-                result = minimax(board_copy, level, False, "o", column=col)
+                result = minimax(board_copy, level-1, False, "o", column=col)
                 move_value = result['value']  
             elif algo == "alpha_beta":
                 result = AlphaBeta_Minimax(board_copy, level, False, "o", float("-inf"), float("inf"), column=col)
@@ -584,7 +405,7 @@ def best_move(board, level, algo="minimax", show=False):
     end = time.time()
     total_time = end - start
     print(f"Time taken: {total_time:.4f} seconds")
-    print(f"Nodes expanded: {expanded_nodes + 1}")
+    print(f"Nodes expanded: {expanded_nodes+1}")
     return (best_col, move_scores)
 
 

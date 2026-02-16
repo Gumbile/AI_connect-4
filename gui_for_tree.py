@@ -6,13 +6,13 @@ import tkinter as tk
 import math
 
 pygame.init()   
-pygame.font.init()  # Explicitly initialize the font module
+pygame.font.init()  
 
 # Constants
 ROWS = 6
 COLS = 7
-SQUARESIZE = 100  # Size of each square
-RADIUS = 40  # Radius of the discs
+SQUARESIZE = 100  
+RADIUS = 40  
 WIDTH = COLS * SQUARESIZE
 HEIGHT = (ROWS + 1) * SQUARESIZE
 BLUE = (0, 0, 255)
@@ -73,13 +73,12 @@ def show_tree(tree):
     root = tk.Tk()
     root.title("Minimax Tree Visualization")
     viz = TreeVisualizer(root)
-    viz.visualize_tree(tree, 600, 50)  # Start at center-top
+    viz.visualize_tree(tree, 600, 50)  
     root.mainloop()
 
 
 
 def draw_board(board, screen):
-    # Draw the blue board with empty black circles
     for c in range(COLS):
         for r in range(ROWS):
             # Draw blue rectangle
@@ -94,7 +93,6 @@ def draw_board(board, screen):
                               int((r + 1) * SQUARESIZE + SQUARESIZE / 2)),
                              RADIUS)
 
-    # Draw the game pieces (x and o)
     for c in range(COLS):
         for r in range(ROWS):
             if board[r][c] == "x":
@@ -113,7 +111,7 @@ def draw_board(board, screen):
 def print_tree(node, depth=0, maximizing_player=None, column=None):
     if node is None:
         return
-    indent = '  ' * depth  # Indent to represent tree depth
+    indent = '  ' * depth 
     move_type = "Max" if maximizing_player else "Min"
     col_info = f" (Chip placed at column = {column})" if column is not None else ""
     print(f'{indent}{move_type}{col_info}: Node at depth = {depth}: Heuristic Value: {node["value"]}')
@@ -135,7 +133,7 @@ def create_tree(board, depth, maximizing_player, player, column=None):
     return {'value': evaluate_heuristic(board, player), 'children': children, 'column': column}
 
 def get_probabilities(board, col):
-    # Initialize probabilities (for all columns)
+    
     probs = [0] * len(board[0])
     probs[col] = 0.6
     
@@ -163,12 +161,12 @@ def print_board(board):
         print(" ".join(row))
 
 def drop_chip(board, col, chip):
-    """Drops the chip into the given column and returns the row where it was placed."""
-    for row in range(len(board) - 1, -1, -1):  # Start from the bottom row and move upwards
+    
+    for row in range(len(board) - 1, -1, -1):  
         if board[row][col] == "_":
             board[row][col] = chip
-            return row  # Return the row where the chip was placed
-    return -1  # Column is full
+            return row 
+    return -1 
 
 def isempty(board, col):
     return board[0][col] == "_"
@@ -180,7 +178,7 @@ def calculate_score(board, player):
     """Calculates the score for a player by counting sequences of 4 consecutive chips."""
     score = 0
 
-    # Check rows, columns, and diagonals for 4 consecutive chips
+   
     for row in range(len(board)):
         for col in range(len(board[0]) - 3):
             if all(board[row][col + i] == player for i in range(4)): score += 1
@@ -342,9 +340,9 @@ def evaluate_window_for_clusters(window, player):
     
     # If there are 2 or 3 pieces in a row and empty spaces, it's a cluster
     if player_count == 2 and empty_count == 2:
-        cluster_points += 1  # A potential 2-in-a-row with 2 empty spots
+        cluster_points += 1  
     elif player_count == 3 and empty_count == 1:
-        cluster_points += 1  # A potential 3-in-a-row with 1 empty spot
+        cluster_points += 1  
     
     return cluster_points
 
@@ -386,7 +384,7 @@ def evaluate_window_for_threats(window, opponent):
     
     # A threat is 3 opponent pieces with 1 empty space
     if opponent_count == 3 and empty_count == 1:
-        threat_points += 1  # This is a potential win for the opponent, so we need to block
+        threat_points += 1 
     
     return threat_points
 
@@ -396,10 +394,10 @@ def evaluate_heuristic(board, player):
     opponent = "x" if player == "o" else "o"
     
     # 1. Offensive sequences (count 4-in-a-row)
-    score += calculate_score(board, player) * 10  # High weight for offensive sequences
+    score += calculate_score(board, player) * 10  
     
     # 2. Defensive sequences (block opponent's 4-in-a-row)
-    score -= calculate_score(board, opponent) * 10  # Negative weight for opponent's sequences
+    score -= calculate_score(board, opponent) * 10  
     
     # 3. Number of candidate points for both players
     score += count_candidate_points(board, player) * 2
@@ -407,8 +405,8 @@ def evaluate_heuristic(board, player):
     
     # 4. Control of the center columns (stronger for central control)
     center_col = len(board[0]) // 2
-    score += 10 *(board[0][center_col] == player and 5)  # Weight for center column
-    score -= board[0][center_col] == opponent and 5  # Weight for blocking center column
+    score += 10 *(board[0][center_col] == player and 5)  
+    score -= board[0][center_col] == opponent and 5  
     
     # 5. Clustering of pieces (reward clusters of connected pieces)
     score += count_clusters(board, player) * 3
@@ -437,7 +435,6 @@ def AlphaBeta_Minimax(board, depth, maximizing_player, player, alpha, beta, colu
         else:
             value = evaluate_heuristic(board, player)
         
-        # Ensure a consistent dictionary structure
         return {'value': value, 'children': [], 'column': column}
 
     valid_columns = get_empty_columns(board)
@@ -446,7 +443,7 @@ def AlphaBeta_Minimax(board, depth, maximizing_player, player, alpha, beta, colu
         max_eval = float("-inf")
         for col in valid_columns:
             child_board = copy.deepcopy(board)
-            row = drop_chip(child_board, col, "o")  # Drop the chip
+            row = drop_chip(child_board, col, "o")  
             child = AlphaBeta_Minimax(child_board, depth - 1, False, player, alpha, beta, column=col)
             board[row][col] = "_"  # Undo the move
             max_eval = max(max_eval, child['value'])
@@ -463,7 +460,7 @@ def AlphaBeta_Minimax(board, depth, maximizing_player, player, alpha, beta, colu
         min_eval = float("inf")
         for col in valid_columns:
             child_board = copy.deepcopy(board)
-            row = drop_chip(child_board, col, "x")  # Drop the chip
+            row = drop_chip(child_board, col, "x")  
             child = AlphaBeta_Minimax(child_board, depth - 1, True, player, alpha, beta, column=col)
             board[row][col] = "_"  # Undo the move
             min_eval = min(min_eval, child['value'])
@@ -491,7 +488,6 @@ def minimax(board, depth, maximizing_player, player, column=None):
         else:
             value = evaluate_heuristic(board, player)
         
-        # Ensure a consistent dictionary structure
         return {'value': value, 'children': [], 'column': column}
     valid_moves = get_empty_columns(board)
     children = []
@@ -532,18 +528,17 @@ def expected_minimax(board, depth, maximizing_player, player, column=None):
         else:
             value = evaluate_heuristic(board, player)
         
-        # Ensure a consistent dictionary structure
         return {'value': value, 'children': [], 'column': column}
 
     valid_columns = get_empty_columns(board)
     children = []
 
-    if maximizing_player:  # Computer's move (maximizing player)
+    if maximizing_player:  
         max_eval = float("-inf")
         best_col = None
 
         for col in valid_columns:
-            # Calculate the probability distribution for the chosen column
+            # Calculate the probability 
             probs = get_probabilities(board, col)
             
             child_board = copy.deepcopy(board)
@@ -562,7 +557,7 @@ def expected_minimax(board, depth, maximizing_player, player, column=None):
 
         return {'value': max_eval, 'children': children, 'column': column}
 
-    else:  # Human's move (minimizing player)
+    else:  
         min_eval = float("inf")
         best_col = None
         total_value = 0
@@ -577,7 +572,7 @@ def expected_minimax(board, depth, maximizing_player, player, column=None):
             board[row][col] = "_" 
             children.append(child)
 
-            # Calculate the expected value by weighting each child value with its probability
+            
             expected_value = sum(prob * child['value'] for prob, child in zip(probs, children))
             min_eval = min(min_eval, expected_value)
 
@@ -591,76 +586,83 @@ def expected_minimax(board, depth, maximizing_player, player, column=None):
 def game_over(board):
     """Checks if the game is over (either player has won or the board is full)."""
     for col in range(len(board[0])):
-        if board[0][col] == "_":  # Check if any column is not full
+        if board[0][col] == "_":  
             return False
     return True
 
-def best_move(board, level, algo="minimax", show=False): 
-    board_copy = copy.deepcopy(board)
-    level = level - 1
-    start = time.time()
+import time
+import copy
+
+# Function to determine the best move for AI in Connect 4
+def best_move(board, level, algo="minimax", show=False):
+    best_col = -1
+    best_value = float("-inf")
     global expanded_nodes
     expanded_nodes = 0
+    start = time.time()
+    board_copy = copy.deepcopy(board)
+    move_scores = []
+    level = level - 1  # Decrement level for proper depth
 
     # Create root node representing current board state
     root_node = {
-        'value': evaluate_heuristic(board, "o"),
+        'value': evaluate_heuristic(board, "o"),  # Heuristic evaluation for "o"
         'children': [],
         'column': None
     }
 
     # Generate children for all valid moves
     for col in range(len(board[0])):
-        if board_copy[0][col] == "_":
+        if board_copy[0][col] == "_":  # Check if column is not full
+            # Deep copy to simulate the move
             board_after_move = copy.deepcopy(board_copy)
+            
+            # Find the correct row for the move (bottom-most available row)
             row = drop_chip(board_after_move, col, "o")
 
+            # Apply the algorithm (Minimax, Alpha-Beta, Expected Minimax)
             if algo == "minimax":
                 result = minimax(board_after_move, level, False, "o", column=col)
             elif algo == "alpha_beta":
                 result = AlphaBeta_Minimax(board_after_move, level, False, "o", float("-inf"), float("inf"), column=col)
             elif algo == "expected_minimax":
                 result = expected_minimax(board_after_move, level, False, "o", column=col)
-            
-            # Create child node and its subtree
+
+            move_value = result['value']  # Use result value to determine move quality
+
+            # Add child to root node
             child_tree = create_tree(board_after_move, level, False, "o", column=col)
             root_node['children'].append(child_tree)
 
-            board_copy[row][col] = "_"  # Reset the move
+            # Keep track of the best move
+            move_scores.append((col, move_value))
 
-    # Find best move from children
-    best_col = -1
-    best_value = float("-inf")
-    move_scores = []
-
-    for i, child in enumerate(root_node['children']):
-        col = child['column']
-        move_value = child['value']
-        move_scores.append((col, move_value))
-
-        if move_value > best_value:
-            best_value = move_value
-            best_col = col
+            # Update best value and column
+            if move_value > best_value:
+                best_value = move_value
+                best_col = col
 
     if show:
         print("Complete Game Tree:")
-        print_tree(root_node, maximizing_player=True)
-        show_tree(root_node)
+        print_tree(root_node, maximizing_player=True)  # Assuming this function prints the tree
+        show_tree(root_node)  # Assuming this function shows the tree visually
 
+    # Record the time taken and number of expanded nodes
     end = time.time()
     total_time = end - start
     print(f"Time taken: {total_time:.4f} seconds")
     print(f"Nodes expanded: {expanded_nodes + 1}")
-    
+
+    # Return the best column and the move scores for all columns
     return (best_col, move_scores)
 
 
 def show_menu(screen):
-    # Initialize level_choice with a default value
-    level_choice = 3  # Default level set to 3
+   
+    level_choice = 3  
 
-    # Shift the menu slightly to the left by changing the `x` starting position
-    menu_x = WIDTH // 9  # You can change this value to shift the menu further left or right
+    
+    menu_x = WIDTH // 9  
 
     screen.fill(WHITE)
 
@@ -730,7 +732,7 @@ def show_menu(screen):
                 screen.blit(level_instructions, (menu_x, HEIGHT // 2 + 120))
                 pygame.display.update()
 
-    return algorithm_choice, level_choice
+    return algorithm_choice, level_choice - 1
 
 
 
